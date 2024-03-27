@@ -26,9 +26,25 @@ jobs:
         with:
           version: latest
 
+      - name: Get next version
+        id: version
+        uses: reecetech/version-increment@2023.10.2
+        with:
+          scheme: semver
+          increment: patch
+
+      - run: git tag ${{ steps.version.outputs.version }}
+      - run: git push origin ${{ steps.version.outputs.version }}
+
+      - name: Set Version
+        run: echo "VERSION=${{ steps.version.outputs.version }}" >> $GITHUB_ENV
+
+      - name: Debug
+        run: echo $GITHUB_ENV
+
       - name: Build
         run: make build
-        
+
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
