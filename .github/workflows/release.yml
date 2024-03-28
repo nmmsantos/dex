@@ -9,7 +9,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     env:
-      SHOULD_PUSH: ${{ github.ref == 'refs/heads/master' }}
+      SHOULD_PUSH: ${{ github.repository_owner == 'nmmsantos' && github.ref == 'refs/heads/master' }}
 
     steps:
 
