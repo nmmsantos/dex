@@ -56,3 +56,4 @@ jobs:
       - name: Build the Docker image and push
         if: env.SHOULD_PUSH == 'true'
         run: make docker-buildx-push DOCKER_TAG=${{ steps.version.outputs.version }}
+#
