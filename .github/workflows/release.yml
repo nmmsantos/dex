@@ -43,8 +43,8 @@ jobs:
       - name: Set Version
         if: env.SHOULD_PUSH == 'true'
         run: |
-          git tag ${{ steps.version.outputs.version }}
-          git push origin ${{ steps.version.outputs.version }}
+          git tag ${{ steps.version.outputs.v-version }}
+          git push origin ${{ steps.version.outputs.v-version }}
 
       - name: Login to DockerHub
         if: env.SHOULD_PUSH == 'true'
@@ -56,4 +56,3 @@ jobs:
       - name: Build the Docker image and push
         if: env.SHOULD_PUSH == 'true'
         run: make docker-buildx-push DOCKER_TAG=${{ steps.version.outputs.version }}
-#
